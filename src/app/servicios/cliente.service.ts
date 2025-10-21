@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from '../modelo/cliente.modelo';
-import { collection, Firestore, orderBy, query } from 'firebase/firestore';
-import { collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, orderBy, query } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
