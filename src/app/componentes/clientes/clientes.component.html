@@ -65,19 +65,154 @@
           </div>
         </div>
         <!-- Segunda Tarjeta -->
-         <div class="card text-center bg-success text-white mb-3">
+        <div class="card text-center bg-success text-white mb-3">
           <div class="card-body">
-            <h3>
-              Total Clientes
-            </h3>
+            <h3>Total Clientes</h3>
             <h4 class="display-4">
               <i class="bi bi-people-fill"></i> {{ clientes?.length }}
             </h4>
-
           </div>
-
-         </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<!--  Modal para Agregar Cliente -->
+<div
+  class="modal fade"
+  id="agregarClienteModal"
+  tabindex="-1"
+  aria-labelledby="agregarClienteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Encabezado del modal -->
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title">Agregar Cliente</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <!-- Formulario para agregar cliente -->
+      <form #clienteForm="ngForm" (ngSubmit)="agregar(clienteForm)">
+        <div class="modal-body">
+          <!-- Nombre -->
+          <div class="d-flex align-items-center mb-3">
+            <label
+              for="nombre"
+              class="form-label me-3"
+              style="min-width: 100px"
+            >
+              Nombre:
+            </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                class="form-control"
+                required
+                placeholder="Ingrese nombre"
+                minlength="2"
+                [(ngModel)]="cliente.nombre"
+                #nombre="ngModel"
+              />
+              @if(nombre.invalid && nombre.touched){
+              <div class="text-danger">
+                Nombre es obligatorio y debe tener al menos 2 caracteres.
+              </div>
+              }
+            </div>
+          </div>
+
+          <!-- Apellido -->
+          <div class="d-flex align-items-center mb-3">
+            <label
+              for="apellido"
+              class="form-label me-3"
+              style="min-width: 100px"
+            >
+              Apellido:
+            </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                id="apellido"
+                name="apellido"
+                class="form-control"
+                required
+                placeholder="Ingrese apellido"
+                minlength="2"
+                [(ngModel)]="cliente.apellido"
+                #apellido="ngModel"
+              />
+              @if(apellido.invalid && apellido.touched){
+              <div class="text-danger">
+                Apellido es obligatorio y debe tener al menos 2 caracteres.
+              </div>
+              }
+            </div>
+          </div>
+          <!-- email -->
+          <div class="d-flex align-items-center mb-3">
+            <label for="email" class="form-label me-3" style="min-width: 100px">
+              Email:
+            </label>
+            <div class="col-sm-9">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                required
+                placeholder="Ingrese email"
+                [(ngModel)]="cliente.email"
+                #email="ngModel"
+              />
+              @if(email.invalid && email.touched){
+              <div class="text-danger">
+                Email es obligatorio y debe ser un email válido.
+              </div>
+              }
+            </div>
+          </div>
+          <!-- Saldo -->
+          <div class="d-flex align-items-center mb-3">
+            <label for="saldo" class="form-label me-3" style="min-width: 100px">
+              Saldo:
+            </label>
+            <div class="col-sm-9">
+              <input
+              type="number"
+              id="saldo"
+              name="saldo"
+              class="form-control"
+              required
+              placeholder="Ingrese saldo"
+              min="0.01"
+              step="0.01"
+              [(ngModel)]="cliente.saldo"
+              #saldo="ngModel"
+            />
+            @if(saldo.invalid && saldo.touched){
+              <div class="text-danger">
+                Saldo es obligatorio y debe ser un número positivo.
+              </div>
+            }
+            </div>
+
+          </div>
+        </div>
+        <!-- Footer del modal -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
