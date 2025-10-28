@@ -44,12 +44,22 @@ export class EditarClienteComponent {
     }
   }
 
-  guardar(NgForm: NgForm) {
+  guardar(clienteForm: NgForm) {
+    const {value, valid} = clienteForm;
+    if(valid){
+      value.id = this.id;
+      this.clienteService.modificarCliente(value);
+      this.router.navigate(['/']);
+    }
 
   }
 
   eliminar(){
-    
+    if(confirm('¿Estás seguro de que deseas eliminar este cliente?')){
+      this.clienteService.eliminarCliente(this.cliente);
+      this.router.navigate(['/']);
+    }
   }
 
 }
+
