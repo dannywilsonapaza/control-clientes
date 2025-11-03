@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../../servicios/login.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,25 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string | null = null;
   password: string | null = null;
+  mensaje: string | null = null;
 
-  constructor(private router: Router) {
-
+  constructor(private router: Router, private loginService: LoginService) {
    }
 
    login(){
-    console.log('Email:', this.email);
+    if(this.email && this.password){
+
+      this.loginService.login(this.email, this.password)
+        .then(() => {
+          this.router.navigate(['/']);
+        })
+        .catch(error => {
+          this.mensaje = 'Error en el login: ' + error;
+        });
+
+   } else {
+      this.mensaje = 'Porfavor ingrese email y password validos';
    }
+}
+
 }
