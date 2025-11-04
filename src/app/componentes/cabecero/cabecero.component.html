@@ -14,21 +14,37 @@
     </button>
     <!-- Contenido de la barra de navegacion -->
     <div class="collapse navbar-collapse" id="navbarCollapse">
+      <!-- Menu visible solo si el usuario está autenticado -->
+       @if (isLoggedIn) {
       <ul class="navbar-nav me-auto">
         <li class="nav-item px-2">
           <a [routerLink]="['/']" class="nav-link">Inicio</a>
         </li>
       </ul>
+    }
 
       <ul class="navbar-nav">
+        @if(isLoggedIn) {
         <li class="nav-item px-2">
           <a [routerLink]="['/']" class="nav-link"><i class="bi bi-person-circle"></i> Bienvenido</a>
         </li>
+      }
+
+          @if(!isLoggedIn) {
         <li class="nav-item px-2">
             <a [routerLink]="['/login']" class="nav-link">
               <i class="bi bi-person"></i> Login
             </a>
         </li>
+      }
+
+      @if(isLoggedIn){
+          <li class="nav-item px-2">
+            <a style='cursor:pointer' (click)='logout()' class="nav-link">
+              <i class="bi bi-box-arrow-right"></i> Salir
+            </a>
+        </li>
+      }
       </ul>
     </div>
 

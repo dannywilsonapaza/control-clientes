@@ -17,6 +17,14 @@ export class LoginComponent {
   constructor(private router: Router, private loginService: LoginService) {
    }
 
+   ngOnInit() {
+    this.loginService.getAuthState().subscribe((usuario) => {
+      if (usuario) {
+        this.router.navigate(['/']);
+      }
+    });
+  }
+
    login(){
     if(this.email && this.password){
 
