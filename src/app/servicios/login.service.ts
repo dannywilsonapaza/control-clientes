@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Auth, authState } from '@angular/fire/auth';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { Auth } from '@angular/fire/auth';
+import { onAuthStateChanged, signInWithEmailAndPassword, User } from 'firebase/auth';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,22 +9,29 @@ import { Observable } from 'rxjs';
 export class LoginService {
   constructor(private authService: Auth) {
   }
-    login(email:string, password: string){
-      return new Promise((resolve, reject) => {
-        signInWithEmailAndPassword(this.authService, email, password)
-        .then(datos => resolve(datos))
-        .catch(error => reject(error));
-      });
-    }
 
-    //Obtener el usuario autenticado
-    getAuthState(): Observable<any> {
-      return authState(this.authService);
-
-    }
-
-    logout(){
-      this.authService.signOut();
-    }
+  login(email: string, password: string) {
+    return signInWithEmailAndPassword(this.authService, email, password);
   }
 
+  /**
+   * Observable del usuario autenticado.
+   * Se usa onAuthStateChanged directamente en lugar de authState() de
+   * AngularFire para evitar el warning de "API called outside injection
+   * context".
+   */
+  getAuthState(): Observable<User | null> {
+    return new Observable((subscriber) => {
+      const unsubscribe = onAuthStateChanged(
+        this.authService,
+        (user) => subscriber.next(user),
+        (error) => subscriber.error(error)
+      );
+      return { unsubscribe };
+    });
+  }
+
+  logout() {
+    this.authService.signOut();
+  }
+}

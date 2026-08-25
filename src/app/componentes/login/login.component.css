@@ -1,0 +1,119 @@
+/* ============================================================
+   Login
+   ============================================================ */
+
+.login {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 160px);
+  padding: 3rem 0 4rem;
+  overflow: hidden;
+}
+
+.login__glow {
+  position: absolute;
+  inset: -20% -20% auto;
+  height: 520px;
+  background:
+    radial-gradient(600px 320px at 30% 10%, rgba(108, 123, 255, 0.18), transparent 65%),
+    radial-gradient(500px 280px at 75% 5%, rgba(139, 92, 246, 0.12), transparent 65%);
+  pointer-events: none;
+}
+
+.login__card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.65);
+  animation: subir 500ms var(--ease-out) both;
+}
+
+.login__cabecera {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.login__logo {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  border-radius: 16px;
+  font-size: 1.5rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  box-shadow: 0 10px 24px -8px rgba(108, 123, 255, 0.6);
+}
+
+.login__titulo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.login__subtitulo {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.login__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: var(--danger-soft);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  color: #ffa3a8;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  animation: subir 300ms var(--ease-out) both;
+}
+
+.login__error i {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+/* Input con icono */
+.login__input {
+  position: relative;
+}
+
+.login__input > i {
+  position: absolute;
+  left: 0.95rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.login__input .form-control {
+  padding-left: 2.6rem;
+}
+
+.login__input:focus-within > i {
+  color: var(--accent-strong);
+}
+
+/* Animación */
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

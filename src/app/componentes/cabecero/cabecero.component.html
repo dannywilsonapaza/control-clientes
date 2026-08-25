@@ -1,52 +1,68 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-sitio sticky-top">
   <div class="container">
-    <!-- Enlace a la pagina principal -->
-     <a [routerLink]="['/']" class="navbar-brand">Control Clientes</a>
-     <!-- Boton para colapsar la barra de navegacion -->
-      <button class="navbar-toggler" type="button"
+    <!-- Enlace a la página principal -->
+    <a [routerLink]="['/']" class="navbar-brand">
+      <span class="brand-logo"><i class="bi bi-people-fill"></i></span>
+      Control Clientes
+    </a>
+
+    <!-- Botón para colapsar la barra de navegación -->
+    <button
+      class="navbar-toggler"
+      type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNav"
       aria-controls="navbarNav"
       aria-expanded="false"
-      aria-label="Toggle navigation"
-      >
-    <span class="navbar-toggler-icon"></span>
+      aria-label="Alternar navegación"
+    >
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- Contenido de la barra de navegacion -->
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <!-- Menu visible solo si el usuario está autenticado -->
-       @if (isLoggedIn) {
+
+    <!-- Contenido de la barra de navegación -->
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item px-2">
-          <a [routerLink]="['/']" class="nav-link">Inicio</a>
-        </li>
-      </ul>
-    }
-
-      <ul class="navbar-nav">
-        @if(isLoggedIn) {
-        <li class="nav-item px-2">
-          <a [routerLink]="['/']" class="nav-link"><i class="bi bi-person-circle"></i> Bienvenido</a>
-        </li>
-      }
-
-          @if(!isLoggedIn) {
-        <li class="nav-item px-2">
-            <a [routerLink]="['/login']" class="nav-link">
-              <i class="bi bi-person"></i> Login
+        @if (isLoggedIn) {
+          <li class="nav-item">
+            <a
+              [routerLink]="['/']"
+              class="nav-link"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              Inicio
             </a>
-        </li>
-      }
+          </li>
+        }
+      </ul>
 
-      @if(isLoggedIn){
-          <li class="nav-item px-2">
-            <a style='cursor:pointer' (click)='logout()' class="nav-link">
+      <ul class="navbar-nav align-items-lg-center gap-lg-1">
+        @if (isLoggedIn) {
+          <li class="nav-item">
+            <span class="nav-usuario">
+              <span class="nav-usuario__avatar">
+                <i class="bi bi-person-circle"></i>
+              </span>
+              <span class="nav-usuario__nombre">{{ loggedInUser }}</span>
+            </span>
+          </li>
+          <li class="nav-item">
+            <a
+              style="cursor: pointer"
+              (click)="logout()"
+              class="nav-link nav-link--salir"
+            >
               <i class="bi bi-box-arrow-right"></i> Salir
             </a>
-        </li>
-      }
+          </li>
+        } @else {
+          <li class="nav-item">
+            <a [routerLink]="['/login']" class="btn btn-ghost btn-sm">
+              <i class="bi bi-person"></i> Iniciar sesión
+            </a>
+          </li>
+        }
       </ul>
     </div>
-
   </div>
 </nav>

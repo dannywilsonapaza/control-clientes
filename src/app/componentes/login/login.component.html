@@ -1,81 +1,80 @@
-<header id="main-header" class="py-2 bg-info text-white">
+<section class="login">
+  <div class="login__glow" aria-hidden="true"></div>
   <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h1>
-              <i class="bi bi-person"></i>
-              Login
-            </h1>
-
-        </div>
-    </div>
-  </div>
-
-</header>
-
-<!-- Mensaje de error -->
-<div class="container my-3">
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-        @if(mensaje){
-          <div class="alert alert-danger text-center" role="alert">
-            {{ mensaje }}
-          </div>
-        }
-
-    </div>
-
-  </div>
-
-</div>
-
-<section id="login">
-    <div class="container my-5">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <div class="card">
-            <div class="card-header">
-                <h4>
-                  Login
-                </h4>
-            </div>
-            <div class="card-body">
-              <form (submit)="login()">
-                <!-- Email -->
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email:</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Ingrese su email"
-                    [(ngModel)]="email"
-                    name="email"
-                    required
-                  />
-                </div>
-                <!-- Password -->
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password:</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    placeholder="Ingrese su password"
-                    [(ngModel)]="password"
-                    name="password"
-                    required
-                  />
-                </div>
-                <input type="submit" value="Login" class="btn btn-primary w-100">
-
-              </form>
-
-            </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-5">
+        <div class="login__card">
+          <div class="login__cabecera">
+            <span class="login__logo"><i class="bi bi-people-fill"></i></span>
+            <h1 class="login__titulo">Bienvenido de nuevo</h1>
+            <p class="login__subtitulo">
+              Inicia sesión para administrar tu cartera de clientes.
+            </p>
           </div>
 
-        </div>
+          @if (mensaje) {
+            <div class="login__error" role="alert">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span>{{ mensaje }}</span>
+            </div>
+          }
 
+          <form (submit)="login()" class="login__form">
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <div class="login__input">
+                <i class="bi bi-envelope"></i>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="tu@email.com"
+                  [(ngModel)]="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+              <label for="password" class="form-label">Contraseña</label>
+              <div class="login__input">
+                <i class="bi bi-lock"></i>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="••••••••"
+                  [(ngModel)]="password"
+                  name="password"
+                  required
+                  autocomplete="current-password"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="cargando"
+            >
+              @if (cargando) {
+                <span
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Iniciando sesión…
+              } @else {
+                <i class="bi bi-box-arrow-in-right me-2"></i> Iniciar sesión
+              }
+            </button>
+          </form>
+        </div>
       </div>
-
     </div>
-
+  </div>
 </section>

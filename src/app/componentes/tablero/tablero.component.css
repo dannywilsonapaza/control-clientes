@@ -1,0 +1,68 @@
+/* Cabecera del tablero (hero) */
+.hero {
+  position: relative;
+  padding: 3.5rem 0 4.5rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero__glow {
+  position: absolute;
+  inset: -40% -20% auto;
+  height: 480px;
+  background:
+    radial-gradient(600px 300px at 30% 20%, rgba(108, 123, 255, 0.22), transparent 65%),
+    radial-gradient(500px 280px at 75% 10%, rgba(139, 92, 246, 0.14), transparent 65%);
+  pointer-events: none;
+}
+
+.hero__contenido {
+  position: relative;
+  max-width: 640px;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.hero__punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 4px var(--success-soft);
+  animation: latido 2.4s var(--ease-in-out) infinite;
+}
+
+.hero__titulo {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.6rem;
+}
+
+.hero__subtitulo {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.7);
+    opacity: 0.6;
+  }
+}

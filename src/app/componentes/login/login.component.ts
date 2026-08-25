@@ -7,17 +7,20 @@ import { LoginService } from '../../servicios/login.service';
   selector: 'app-login',
   imports: [FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   email: string | null = null;
   password: string | null = null;
   mensaje: string | null = null;
+  cargando = false;
 
-  constructor(private router: Router, private loginService: LoginService) {
-   }
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+  ) {}
 
-   ngOnInit() {
+  ngOnInit() {
     this.loginService.getAuthState().subscribe((usuario) => {
       if (usuario) {
         this.router.navigate(['/']);
@@ -25,20 +28,23 @@ export class LoginComponent {
     });
   }
 
-   login(){
-    if(this.email && this.password){
+  login() {
+    if (this.email && this.password) {
+      this.cargando = true;
 
-      this.loginService.login(this.email, this.password)
+      this.loginService
+        .login(this.email, this.password)
         .then(() => {
           this.router.navigate(['/']);
         })
-        .catch(error => {
+        .catch((error) => {
           this.mensaje = 'Error en el login: ' + error;
+        })
+        .finally(() => {
+          this.cargando = false;
         });
-
-   } else {
+    } else {
       this.mensaje = 'Porfavor ingrese email y password validos';
-   }
-}
-
+    }
+  }
 }

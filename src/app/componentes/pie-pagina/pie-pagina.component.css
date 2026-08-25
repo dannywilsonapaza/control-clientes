@@ -1,0 +1,25 @@
+/* ---------- Footer ---------- */
+.pie {
+  margin-top: 4rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.5rem 0;
+}
+
+.pie__contenido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.pie__logo {
+  color: var(--accent-strong);
+  font-size: 1rem;
+  line-height: 0;
+}
+
+.pie__texto {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}

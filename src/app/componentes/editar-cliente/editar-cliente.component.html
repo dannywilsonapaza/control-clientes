@@ -1,45 +1,62 @@
-<header id="main-header" class="py-2 bg-info text-white">
+<section class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
   <div class="container">
-    <h1>
-      <i class="bi bi-person"></i>
-      Editar Cliente
-    </h1>
+    <div class="hero__contenido">
+      <span class="hero__eyebrow">
+        <span class="hero__punto"></span>
+        Gestión de clientes
+      </span>
+      <h1 class="hero__titulo">Editar Cliente</h1>
+      <p class="hero__subtitulo">
+        Actualiza los datos y el saldo del cliente seleccionado.
+      </p>
+    </div>
   </div>
-</header>
+</section>
 
 <form #clienteForm="ngForm" (ngSubmit)="guardar(clienteForm)">
-  <!-- Botones -->
-  <section id="actions" class="py-4 mb-4">
-    <div class="container d-flex justify-content-between">
-      <a [routerLink]="['/']" class="btn btn-primary">
-        <i class="bi bi-arrow-left"></i> Regresar al Inicio
-      </a>
-      <button type="submit" class="btn btn-success">
-        <i class="bi bi-check"></i> Guardar Cliente
-      </button>
-      <a href="#" (click)="eliminar()" class="btn btn-danger">
-        <i class="bi bi-trash"></i> Eliminar Cliente
-      </a>
+  <!-- Barra de acciones -->
+  <section class="acciones">
+    <div class="container">
+      <div class="acciones__barra">
+        <a [routerLink]="['/']" class="btn btn-ghost">
+          <i class="bi bi-arrow-left"></i> Regresar al Inicio
+        </a>
+        <div class="acciones__grupo">
+          <a
+            href="javascript:void(0)"
+            (click)="eliminar()"
+            class="btn btn-danger"
+          >
+            <i class="bi bi-trash"></i> Eliminar Cliente
+          </a>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="clienteForm.invalid"
+          >
+            <i class="bi bi-check-lg"></i> Guardar Cliente
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="details">
+  <!-- Detalle del cliente -->
+  <section class="detalle">
     <div class="container">
-      <div class="card">
-        <div class="card-header">
-          <h4>Editar Cliente</h4>
+      <div class="detalle__card">
+        <div class="detalle__card-header">
+          <div>
+            <h4 class="detalle__titulo">Datos del cliente</h4>
+            <p class="detalle__subtitulo">Revisa y actualiza la información.</p>
+          </div>
         </div>
-        <div class="card-body">
-          <!-- Nombre -->
-          <div class="d-flex align-items-center mb-3">
-            <label
-              for="nombre"
-              class="form-label me-3"
-              style="min-width: 100px"
-            >
-              Nombre:
-            </label>
-            <div class="col-sm-9">
+        <div class="detalle__card-body">
+          <div class="row g-3">
+            <!-- Nombre -->
+            <div class="col-md-6">
+              <label for="nombre" class="form-label">Nombre</label>
               <input
                 type="text"
                 id="nombre"
@@ -51,24 +68,16 @@
                 [(ngModel)]="cliente.nombre"
                 #nombre="ngModel"
               />
-              @if(nombre.invalid && nombre.touched){
-              <div class="text-danger">
-                Nombre es obligatorio y debe tener al menos 2 caracteres.
-              </div>
+              @if (nombre.invalid && nombre.touched) {
+                <div class="text-danger">
+                  Nombre es obligatorio y debe tener al menos 2 caracteres.
+                </div>
               }
             </div>
-          </div>
 
-          <!-- Apellido -->
-          <div class="d-flex align-items-center mb-3">
-            <label
-              for="apellido"
-              class="form-label me-3"
-              style="min-width: 100px"
-            >
-              Apellido:
-            </label>
-            <div class="col-sm-9">
+            <!-- Apellido -->
+            <div class="col-md-6">
+              <label for="apellido" class="form-label">Apellido</label>
               <input
                 type="text"
                 id="apellido"
@@ -80,19 +89,16 @@
                 [(ngModel)]="cliente.apellido"
                 #apellido="ngModel"
               />
-              @if(apellido.invalid && apellido.touched){
-              <div class="text-danger">
-                Apellido es obligatorio y debe tener al menos 2 caracteres.
-              </div>
+              @if (apellido.invalid && apellido.touched) {
+                <div class="text-danger">
+                  Apellido es obligatorio y debe tener al menos 2 caracteres.
+                </div>
               }
             </div>
-          </div>
-          <!-- email -->
-          <div class="d-flex align-items-center mb-3">
-            <label for="email" class="form-label me-3" style="min-width: 100px">
-              Email:
-            </label>
-            <div class="col-sm-9">
+
+            <!-- Email -->
+            <div class="col-md-6">
+              <label for="email" class="form-label">Email</label>
               <input
                 type="email"
                 id="email"
@@ -103,35 +109,35 @@
                 [(ngModel)]="cliente.email"
                 #email="ngModel"
               />
-              @if(email.invalid && email.touched){
-              <div class="text-danger">
-                Email es obligatorio y debe ser un email válido.
-              </div>
+              @if (email.invalid && email.touched) {
+                <div class="text-danger">
+                  Email es obligatorio y debe ser un email válido.
+                </div>
               }
             </div>
-          </div>
-          <!-- Saldo -->
-          <div class="d-flex align-items-center mb-3">
-            <label for="saldo" class="form-label me-3" style="min-width: 100px">
-              Saldo:
-            </label>
-            <div class="col-sm-9">
-              <input
-                type="number"
-                id="saldo"
-                name="saldo"
-                class="form-control"
-                required
-                placeholder="Ingrese saldo"
-                min="0.01"
-                step="0.01"
-                [(ngModel)]="cliente.saldo"
-                #saldo="ngModel"
-              />
-              @if(saldo.invalid && saldo.touched){
-              <div class="text-danger">
-                Saldo es obligatorio y debe ser un número positivo.
+
+            <!-- Saldo -->
+            <div class="col-md-6">
+              <label for="saldo" class="form-label">Saldo</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input
+                  type="number"
+                  id="saldo"
+                  name="saldo"
+                  class="form-control"
+                  required
+                  placeholder="0.00"
+                  min="0.01"
+                  step="0.01"
+                  [(ngModel)]="cliente.saldo"
+                  #saldo="ngModel"
+                />
               </div>
+              @if (saldo.invalid && saldo.touched) {
+                <div class="text-danger">
+                  Saldo es obligatorio y debe ser un número positivo.
+                </div>
               }
             </div>
           </div>

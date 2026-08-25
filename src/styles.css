@@ -1,1 +1,264 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   Control de Clientes — Estilos globales
+   Tema oscuro + tokens de diseño (filosofía de UI con detalle)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ---------- Tokens de diseño ---------- */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Superficies */
+  --bg: #0b0e14;
+  --surface: #12151f;
+  --surface-2: #171b28;
+  --surface-3: #1f2433;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.12);
+
+  /* Texto */
+  --text: #eef1f6;
+  --text-secondary: #9aa4b8;
+  --text-muted: #6b7488;
+
+  /* Acentos */
+  --accent: #6c7bff;
+  --accent-strong: #7f8cff;
+  --accent-soft: rgba(108, 123, 255, 0.14);
+  --success: #34d399;
+  --success-soft: rgba(52, 211, 153, 0.14);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.14);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.14);
+}
+
+/* ---------- Override del tema oscuro de Bootstrap ---------- */
+[data-bs-theme='dark'] {
+  --bs-body-bg: var(--bg);
+  --bs-body-color: var(--text);
+  --bs-border-color: var(--border);
+  --bs-secondary-color: var(--text-secondary);
+  --bs-tertiary-color: var(--text-muted);
+  --bs-primary: var(--accent);
+  --bs-primary-rgb: 108, 123, 255;
+  --bs-info: var(--accent);
+  --bs-info-rgb: 108, 123, 255;
+  --bs-success: var(--success);
+  --bs-success-rgb: 52, 211, 153;
+  --bs-danger: var(--danger);
+  --bs-danger-rgb: 248, 113, 113;
+  --bs-warning: var(--warning);
+  --bs-warning-rgb: 251, 191, 36;
+  --bs-link-color: var(--accent-strong);
+  --bs-link-hover-color: #93a0ff;
+}
+
+/* ---------- Base ---------- */
+body {
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(108, 123, 255, 0.07), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-feature-settings: 'cv02', 'cv03', 'cv04';
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-3);
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 0.55rem 1.1rem;
+  transition:
+    transform 160ms var(--ease-out),
+    box-shadow 200ms var(--ease-out),
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 20px -10px rgba(108, 123, 255, 0.55);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--accent-strong), #9666ff);
+  color: #fff;
+}
+.btn-primary:disabled {
+  background: var(--surface-3);
+  box-shadow: none;
+  color: var(--text-muted);
+}
+
+.btn-secondary {
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+}
+.btn-secondary:hover {
+  background: var(--surface-3);
+  color: var(--text);
+}
+
+.btn-danger {
+  background: var(--danger);
+  border: none;
+  color: #2a0d10;
+}
+.btn-danger:hover {
+  background: #ff8282;
+  color: #2a0d10;
+}
+
+/* Botón fantasma (uso secundario en navbar / modales) */
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-secondary);
+}
+.btn-ghost:hover {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-danger:hover,
+  .btn-ghost:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* ---------- Tarjetas ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Formularios ---------- */
+.form-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.form-control {
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 0.6rem 0.9rem;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+.form-control:focus {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  color: var(--text);
+}
+.form-control.is-invalid,
+.form-control.ng-invalid.ng-touched {
+  border-color: var(--danger);
+  background-image: none;
+}
+.text-danger {
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+}
+
+/* ---------- Tablas ---------- */
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  --bs-table-border-color: var(--border);
+}
+
+/* ---------- Modales ---------- */
+.modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+}
+.modal-backdrop.show {
+  opacity: 0.6;
+}
+.btn-close {
+  filter: invert(1) grayscale(1);
+  opacity: 0.6;
+}
+.btn-close:hover {
+  opacity: 1;
+}
+.modal-subtitle {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- Accesibilidad: movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

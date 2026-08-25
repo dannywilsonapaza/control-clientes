@@ -1,0 +1,79 @@
+/* ---------- Navbar ---------- */
+.navbar-sitio {
+  background: rgba(11, 14, 20, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.brand-logo {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  box-shadow: 0 6px 16px -6px rgba(108, 123, 255, 0.6);
+}
+
+.navbar-sitio .nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.5rem 0.85rem;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.navbar-sitio .nav-link.active {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .navbar-sitio .nav-link:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+}
+
+.nav-link--salir {
+  color: var(--danger) !important;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav-link--salir:hover {
+    color: var(--danger) !important;
+    background: var(--danger-soft) !important;
+  }
+}
+
+.nav-usuario {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 0.85rem;
+  white-space: nowrap;
+}
+
+.nav-usuario__avatar {
+  font-size: 1.3rem;
+  color: var(--accent-strong);
+  line-height: 0;
+}
